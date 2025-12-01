@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays & Algo - TP & TD Solutions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .header-icon {
+      font-size: 1.2em;
+    }
+    
+    .subtitle {
+      font-size: 1.1em;
+      opacity: 0.95;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      background: #f8f9fa;
+      border-bottom: 2px solid #e9ecef;
+      padding: 0 40px;
+      gap: 10px;
+    }
+    
+    .tab-btn {
+      padding: 15px 30px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      color: #6c757d;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+    
+    .tab-btn:hover {
+      color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+    }
+    
+    .tab-btn.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+    }
+    
+    .content {
+      padding: 40px;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .exercise {
+      margin-bottom: 40px;
+      border-left: 4px solid #667eea;
+      padding-left: 25px;
+    }
+    
+    .exercise-title {
+      color: #667eea;
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    
+    .exercise-description {
+      color: #495057;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      font-size: 1.05em;
+    }
+    
+    .code-section {
+      margin-bottom: 25px;
+    }
+    
+    .code-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+    
+    .icon {
+      font-size: 1.2em;
+    }
+    
+    .code-block {
+      background: #282c34;
+      color: #abb2bf;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.95em;
+      line-height: 1.6;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .code-block .keyword {
+      color: #c678dd;
+    }
+    
+    .code-block .function {
+      color: #61afef;
+    }
+    
+    .code-block .string {
+      color: #98c379;
+    }
+    
+    .code-block .comment {
+      color: #5c6370;
+      font-style: italic;
+    }
+    
+    .section-divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, #667eea, transparent);
+      margin: 50px 0;
+    }
+    
+    .chapter-title {
+      color: #495057;
+      font-size: 2em;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #667eea;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>
+        <span class="header-icon">📚</span>
+        Algorithm & C Programming
+      </h1>
+      <p class="subtitle">Complete TP & TD Solutions - Pseudocode vs C</p>
+    </div>
+    
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showTab('tp')">TP Exercises</button>
+      <button class="tab-btn" onclick="showTab('td')">TD Exercises</button>
+    </div>
+    
+    <div class="content">
+      <!-- TP TAB -->
+      <div id="tp" class="tab-content active">
+        <h2 class="chapter-title">TP4 - Array Operations</h2>
+        
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 1: Input and Display Array</h3>
+          <p class="exercise-description">
+            Read N elements from user input and store them in an array, then display all elements.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+<span class="comment">// Reading array elements</span>
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N-1 <span class="keyword">do</span>
+    <span class="function">Read</span> TAB[i]
+<span class="keyword">End For</span>
+
+<span class="comment">// Displaying array elements</span>
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N-1 <span class="keyword">do</span>
+    <span class="function">Write</span> TAB[i]
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="comment">// Reading array elements</span>
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N; i++) {
+    <span class="function">scanf</span>(<span class="string">"%d"</span>, &TAB[i]);
+}
+
+<span class="comment">// Displaying array elements</span>
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N; i++) {
+    <span class="function">printf</span>(<span class="string">"%d "</span>, TAB[i]);
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 2: Display Even Numbers</h3>
+          <p class="exercise-description">
+            Traverse the array and display only the even numbers (numbers divisible by 2).
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N-1 <span class="keyword">do</span>
+    <span class="keyword">If</span> TAB[i] <span class="keyword">mod</span> 2 = 0 <span class="keyword">then</span>
+        <span class="function">Write</span> TAB[i]
+    <span class="keyword">End If</span>
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N; i++) {
+    <span class="keyword">if</span>(TAB[i] % 2 == 0) {
+        <span class="function">printf</span>(<span class="string">"%d "</span>, TAB[i]);
+    }
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 3: Search for Value and Display Position</h3>
+          <p class="exercise-description">
+            Search for a specific value in the array and display all positions where it occurs.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+<span class="function">Read</span> Val
+found ← <span class="keyword">False</span>
+
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N-1 <span class="keyword">do</span>
+    <span class="keyword">If</span> TAB[i] = Val <span class="keyword">then</span>
+        <span class="function">Write</span> i
+        found ← <span class="keyword">True</span>
+    <span class="keyword">End If</span>
+<span class="keyword">End For</span>
+
+<span class="keyword">If</span> <span class="keyword">not</span> found <span class="keyword">then</span>
+    <span class="function">Write</span> <span class="string">"Not found"</span>
+<span class="keyword">End If</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">int</span> Val, found = 0;
+<span class="function">scanf</span>(<span class="string">"%d"</span>, &Val);
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N; i++) {
+    <span class="keyword">if</span>(TAB[i] == Val) {
+        <span class="function">printf</span>(<span class="string">"%d "</span>, i);
+        found = 1;
+    }
+}
+
+<span class="keyword">if</span>(!found) {
+    <span class="function">printf</span>(<span class="string">"Not found\n"</span>);
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 4: Replace with Sum of Following Elements</h3>
+          <p class="exercise-description">
+            Replace each element with the sum of all elements that come after it in the array.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+sum ← 0
+
+<span class="keyword">For</span> i <span class="keyword">from</span> N-1 <span class="keyword">downto</span> 0 <span class="keyword">do</span>
+    temp ← TAB[i]
+    TAB[i] ← sum
+    sum ← sum + temp
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">int</span> sum = 0;
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i=N-1; i&gt;=0; i--) {
+    <span class="keyword">int</span> temp = TAB[i];
+    TAB[i] = sum;
+    sum += temp;
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 5: Find Duplicates</h3>
+          <p class="exercise-description">
+            Find and display all duplicate values in the array using nested loops.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N-1 <span class="keyword">do</span>
+    <span class="keyword">For</span> j <span class="keyword">from</span> i+1 <span class="keyword">to</span> N-1 <span class="keyword">do</span>
+        <span class="keyword">If</span> TAB[i] = TAB[j] <span class="keyword">then</span>
+            <span class="function">Write</span> TAB[i]
+        <span class="keyword">End If</span>
+    <span class="keyword">End For</span>
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div
+<span class="keyword">to</span> N-1 <span class="keyword">do</span>
+    <span class="keyword">If</span> TAB[i] &lt; min <span class="keyword">then</span>
+        min ← TAB[i]
+    <span class="keyword">End If</span>
+    <span class="keyword">If</span> TAB[i] > max <span class="keyword">then</span>
+        max ← TAB[i]
+    <span class="keyword">End If</span>
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">int</span> min = TAB[0], max = TAB[0];
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i=1; i&lt;N; i++) {
+    <span class="keyword">if</span>(TAB[i] &lt; min) min = TAB[i];
+    <span class="keyword">if</span>(TAB[i] > max) max = TAB[i];
+}
+
+<span class="function">printf</span>(<span class="string">"Min: %d, Max: %d\n"</span>, min, max);
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 4: Reverse an Array</h3>
+          <p class="exercise-description">
+            Reverse the order of elements in an array.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N/2-1 <span class="keyword">do</span>
+    temp ← TAB[i]
+    TAB[i] ← TAB[N-1-i]
+    TAB[N-1-i] ← temp
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N/2; i++) {
+    <span class="keyword">int</span> temp = TAB[i];
+    TAB[i] = TAB[N-1-i];
+    TAB[N-1-i] = temp;
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 5: Check if Array is Sorted</h3>
+          <p class="exercise-description">
+            Determine if an array is sorted in ascending order.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">📝</span>
+              Pseudocode
+            </div>
+            <div class="code-block">
+sorted ← <span class="keyword">True</span>
+
+<span class="keyword">For</span> i <span class="keyword">from</span> 0 <span class="keyword">to</span> N-2 <span class="keyword">do</span>
+    <span class="keyword">If</span> TAB[i] > TAB[i+1] <span class="keyword">then</span>
+        sorted ← <span class="keyword">False</span>
+        <span class="keyword">Break</span>
+    <span class="keyword">End If</span>
+<span class="keyword">End For</span>
+            </div>
+          </div>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">int</span> sorted = 1;
+
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N-1; i++) {
+    <span class="keyword">if</span>(TAB[i] > TAB[i+1]) {
+        sorted = 0;
+        <span class="keyword">break</span>;
+    }
+}
+
+<span class="keyword">if</span>(sorted) {
+    <span class="function">printf</span>(<span class="string">"Array is sorted\n"</span>);
+} <span class="keyword">else</span> {
+    <span class="function">printf</span>(<span class="string">"Array is not sorted\n"</span>);
+}
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <h3 class="exercise-title">Exercise 6: Copy Array Elements</h3>
+          <p class="exercise-description">
+            Copy all elements from one array to another.
+          </p>
+          
+          <div class="code-section">
+            <div class="code-label">
+              <span class="icon">💻</span>
+              C Language
+            </div>
+            <div class="code-block">
+<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;N; i++) {
+    TAB2[i] = TAB1[i];
+}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabName) {
+      // Hide all tab contents
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+      
+      // Remove active class from all buttons
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+      
+      // Activate clicked button
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
